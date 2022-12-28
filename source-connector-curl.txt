@@ -1,0 +1,26 @@
+/*
+* Source connector curl
+*/
+
+ curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" \
+  localhost:8083/connectors/ \
+  -d '{
+  "name": "ybconnector",
+  "config": {
+    "connector.class": "io.debezium.connector.yugabytedb.YugabyteDBConnector",
+    "database.hostname": "172.165.20.83",
+    "database.port":"5433",
+    "database.master.addresses": "172.165.20.83:7100",
+    "database.user": "yugabyte",
+    "database.password": "yugabyte",
+    "database.dbname" : "yugabyte",
+    "database.server.name": "dbserver1",
+    "table.include.list":"public.t1",
+    "database.streamid":"c02da88e39df44b8b5a80bb2492a27dd",
+    "key.converter.schemas.enable":"false",
+        "value.converter.schemas.enable":"false",
+    "transforms":"unwrap",
+    "transforms.unwrap.type":"io.debezium.connector.yugabytedb.transforms.YBExtractNewRecordState",
+    "snapshot.mode":"never"
+  }
+}'
